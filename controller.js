@@ -1,6 +1,10 @@
 const https = require('https');
 const Post = require('./model/post.model.js')
 
+const posts = [];
+
+module.exports.posts = posts;
+
 const postEndpoints = [];
 
 const initEndpoints = function () {
@@ -16,12 +20,12 @@ const initEndpoints = function () {
 };
 
 
-module.exports.createRandomPost = function (userId) {
+const createRandomPost = function (userId) {
 
     let date = new Date();
     let nbLikes = Math.floor(Math.random() * 100000);
 
-    let randomEndpoint = postEndpoints[Math.floor(Math.random() * postEndpoint.length)];
+    let randomEndpoint = postEndpoints[Math.floor(Math.random() * postEndpoints.length)];
 
     const req = https.request(randomEndpoint.endpoint, res => {
         let data = '';
@@ -31,7 +35,7 @@ module.exports.createRandomPost = function (userId) {
         res.on('end', () => {
             const body = JSON.parse(data);
             let content = body[randomEndpoint.attr];
-            new Post(content, date, nbLikes, userId);
+            posts.push(new Post(content, date, nbLikes, userId));
         });
     });
     req.on('error', (error) => {
@@ -40,5 +44,7 @@ module.exports.createRandomPost = function (userId) {
     req.end();
 
 };
+
+module.exports.createRandomPost = createRandomPost;
 
 initEndpoints();
