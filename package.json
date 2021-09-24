@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "mocha test/**/*.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,7 +17,13 @@
     "pug": "^3.0.2"
   },
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.1.1",
+    "mockery": "^2.1.0",
+    "supertest": "^6.1.6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GaspardMines/tp_cicd.git"
