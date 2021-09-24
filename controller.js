@@ -1,5 +1,6 @@
 const https = require('https');
 const Post = require('./model/post.model.js')
+const fs = require("fs");
 
 const posts = [];
 
@@ -48,3 +49,39 @@ const createRandomPost = function (userId) {
 module.exports.createRandomPost = createRandomPost;
 
 initEndpoints();
+function createBaseUser(){
+    let userList = require('./userList.json')
+    if(!userList.hasOwnProperty("users")){
+        var obj = {
+            users: []
+        };
+        //Todo : utiliser les méthodes de création d'user et de création de post pour remplir le obj
+        /*
+        for(int i = 0; i<50; i++){
+            //todo créer un user
+            <methode creation user>
+            //todo ajout post à cet user
+            for(int j = 0; j<3; j++){
+              <methode creation post>
+              user.Posts.push(post);
+            }
+            obj.users.push(user);
+        }
+        */
+        var json = JSON.stringify(obj);
+        var fs = require('fs');
+        fs.writeFile('userList.json', json, 'utf8', function writeFileCallback(err, data){});
+    }
+}
+
+function getAllPost(){
+    let userList = [];
+    let posts = []
+    userList = require('./userList.json')
+    userList.users.forEach(user => {
+        user.Posts.forEach(post => {
+            posts.push(post);
+        })
+    })
+    return posts;
+}
