@@ -1,29 +1,27 @@
 const https = require('https');
 
+
+const options = {
+    hostname: 'https://randomuser.me',
+    port: 443,
+    path: '/api',
+    method: 'GET'
+}
+
 let User = class{
-    postcode;
-    birthdate;
-    surname;
-    name;
-    id;
-    photo;
-    Posts = [];
-    email;
-    username;
-    accountCreation;
-    phoneNumber;
-    gender;
-    constructor(id, name, surname, birthdate, postcode, photo, email, username, accountCreation, phoneNumber, gender){
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birthdate = birthdate;
-        this.postcode = postcode;
-        this.photo = photo;
-        this.email = email;
-        this.username = username;
-        this.accountCreation = accountCreation;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
+    constructor(){
+
+        this.id;
+        this.name;
+        this.surname;
+        this.birthdate;
+        this.postcode;
+        this.photo;
+        this.Posts;
+        this.email;
+        this.username;
+        this.accountCreation;
+        this.phoneNumber;
+        this.gender;
     }
 }
