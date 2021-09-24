@@ -12,6 +12,20 @@
     "http": "*",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
-    "morgan": "~1.9.1"
-  }
+    "morgan": "~1.9.1",
+    "pug": "^3.0.2"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaspardMines/tp_cicd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GaspardMines/tp_cicd/issues"
+  },
+  "homepage": "https://github.com/GaspardMines/tp_cicd#readme",
+  "description": ""
 }
