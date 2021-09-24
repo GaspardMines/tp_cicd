@@ -85,3 +85,23 @@ function getAllPost(){
     })
     return posts;
 }
+
+function updateLike(userId, id){
+    let userList = [];
+    userList = require('./userList.json');
+    userList.users.forEach(user => {
+        if(user.id == userId){
+            user.Posts.forEach(post => {
+                    console.log(post);
+                if(post.id == id){
+                    post.nbLikes = post.nbLikes + 1;
+                }
+                    console.log(post);
+            })
+        }
+    })
+    var json = JSON.stringify(userList);
+    var fs = require('fs');
+    fs.writeFile('userList.json', json, 'utf8', function writeFileCallback(err, data){});
+}
+module.exports = {getAllPost, createBaseUser, updateLike}

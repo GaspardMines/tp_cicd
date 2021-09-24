@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    each post in listPosts
+      div
+        p #{post.content}
+        a(href='./posts/updatelike?userId='+ post.userId + '&id=' + post.id) #{post.nbLikes}
+          img(src="/images/like.png" style='width:20px; height:20px;')
+        p #{post.date}
+      br
+      hr
