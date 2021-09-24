@@ -1,13 +1,5 @@
 const https = require('https');
 
-
-const options = {
-    hostname: 'https://randomuser.me',
-    port: 443,
-    path: '/api',
-    method: 'GET'
-}
-
 let User = class{
     postcode;
     birthdate;
@@ -21,17 +13,43 @@ let User = class{
     accountCreation;
     phoneNumber;
     gender;
-    constructor(id, name, surname, birthdate, postcode, photo, email, username, accountCreation, phoneNumber, gender){
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birthdate = birthdate;
-        this.postcode = postcode;
-        this.photo = photo;
-        this.email = email;
-        this.username = username;
-        this.accountCreation = accountCreation;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
+
+    constructor(){
+        this.getData();
     }
+
+    getData(){
+        const req = https.request('https://randomuser.me/api', res => {
+            let data = '';
+            res.on('data', (chunk) => {
+                data = data + chunk.toString();
+            });
+            res.on('end', () => {
+                const body = JSON.parse(data).results[0];
+                this.id = body.login.uuid;
+                this.name = body.name.first;
+                this.surname = body.name.last;
+                this.postcode = body.location.postcode;
+                this.accountCreation = body.registered.date;
+                this.birthdate = body.dob.date;
+                this.photo = body.picture.medium;
+                this.username= body.login.username;
+                this.email= body.email;
+                this.phoneNumber= body.cell;
+                this.gender=body.gender;
+                this.Posts = [];
+            });
+        });
+        req.on('error', (error) => {
+            console.log('An error', error);
+        });
+        req.end();
+    }
+
+
+
+}
+
+module.exports={
+    User
 }
