@@ -36,7 +36,7 @@ const createRandomPost = function (userId) {
         res.on('end', () => {
             const body = JSON.parse(data);
             let content = body[randomEndpoint.attr];
-            posts.push(new Post(content, date, nbLikes, userId));
+            posts.push(new Post(posts.length, content, date, nbLikes, userId));
         });
     });
     req.on('error', (error) => {
@@ -46,9 +46,9 @@ const createRandomPost = function (userId) {
 
 };
 
-module.exports.createRandomPost = createRandomPost;
 
 initEndpoints();
+
 function createBaseUser(){
     let userList = require('./userList.json')
     if(!userList.hasOwnProperty("users")){
@@ -105,3 +105,4 @@ function updateLike(userId, id){
     fs.writeFile('userList.json', json, 'utf8', function writeFileCallback(err, data){});
 }
 module.exports = {getAllPost, createBaseUser, updateLike}
+module.exports.createRandomPost = createRandomPost;
