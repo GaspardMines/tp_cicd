@@ -1,5 +1,4 @@
 const https = require('https');
-const Post = require('./post.model.js');
 
 let User = class{
     postcode;
@@ -37,14 +36,8 @@ let User = class{
                 this.username= body.login.username;
                 this.email= body.email;
                 this.phoneNumber= body.cell;
-                this.gender = body.gender;
-
+                this.gender=body.gender;
                 this.Posts = [];
-                let nbPosts = Math.floor(Math.random * 7) + 3; //creates between 3 et 10 posts randomly
-                for (var i = 0; i < nbPosts; i++) {
-                    this.Posts.push(new Post(this.id));
-                }
-                
             });
         });
         req.on('error', (error) => {
