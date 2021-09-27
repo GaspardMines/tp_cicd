@@ -27,6 +27,18 @@ function createBaseUser(){
     }
 }
 
+function getAllPost(){
+    let userList = [];
+    let posts = []
+    userList = require('./userList.json')
+    userList.users.forEach(user => {
+        user.Posts.forEach(post => {
+            posts.push(post);
+        })
+    })
+    return posts;
+}
+
 function updateLike(userId, id){
     let userList = [];
     userList = require('./userList.json');
@@ -45,4 +57,4 @@ function updateLike(userId, id){
     var fs = require('fs');
     fs.writeFile('userList.json', json, 'utf8', function writeFileCallback(err, data){});
 }
-module.exports = {createBaseUser, updateLike}
+module.exports = {getAllPost, createBaseUser, updateLike}
