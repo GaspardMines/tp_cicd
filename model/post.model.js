@@ -28,23 +28,35 @@ let Post = class{
         this.userId = userId;
         this.nbLikes = Math.floor(Math.random() * 100000);
 
-        let randomEndpoint = postEndpoints[Math.floor(Math.random() * postEndpoints.length)];
 
-        const req = https.request(randomEndpoint.endpoint, res => {
-            let data = '';
-            res.on('data', (chunk) => {
-                data = data + chunk.toString();
+    }
+
+    static async build(userId) {
+        let obj = new Post(userId);
+        await obj.initContent();
+        return obj;
+    }
+
+    initContent() {
+        return new Promise((resolve, reject) => {
+            let randomEndpoint = postEndpoints[Math.floor(Math.random() * postEndpoints.length)];
+            const req = https.request(randomEndpoint.endpoint, res => {
+                let data = '';
+                res.on('data', (chunk) => {
+                    data = data + chunk.toString();
+                });
+                res.on('end', () => {
+                    const body = JSON.parse(data);
+                    this.date = new Date();
+                    this.content = body[randomEndpoint.attr];
+                    resolve();
+                });
             });
-            res.on('end', () => {
-                const body = JSON.parse(data);
-                this.date = new Date();
-                this.content = body[randomEndpoint.attr];
+            req.on('error', (error) => {
+                console.error(error);
             });
+            req.end();
         });
-        req.on('error', (error) => {
-            console.error(error);
-        });
-        req.end();
     }
 
 }

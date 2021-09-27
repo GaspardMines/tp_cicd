@@ -1,11 +1,16 @@
 extends layout
 
 block content
+    h4 Créer un utilisateur :
+    a(href='./users/new') cliquez ici svp
+
+    h1 Liste des posts de tous les utilisateurs :
     each post in listPosts
       div
         p #{post.content}
         a(href='./posts/updatelike?userId='+ post.userId + '&id=' + post.id) #{post.nbLikes}
           img(src="/images/like.png" style='width:20px; height:20px;')
         p #{post.date}
+        a(href='./users/id?userId='+ post.userId) voir profil
       br
       hr

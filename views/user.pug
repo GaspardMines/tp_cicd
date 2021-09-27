@@ -1,0 +1,30 @@
+extends layout
+
+block content
+        div
+            h1 Profil utilisateur :
+            p #{user.photo}
+
+            p #{user.name} #{user.surname}
+
+            p Email : #{user.email}
+
+            p Date de naissance : #{user.birthdate}
+
+            p Code postal : #{user.postcode}
+
+            p Numéro de téléphone : #{user.phoneNumber}
+
+            p Genre : #{user.gender}
+
+            p Date de création de compte : #{user.accountCreation}
+
+            h1 Posts de cet utilisateur :
+
+            h4 Créer un post pour cet utilisateur :
+                a(href='http://localhost:3000/posts/new?userId='+ user.id) cliquez ici svp
+            each post in user.Posts
+                div
+                    p #{post.content}
+                    p #{post.date}
+                    hr
