@@ -57,7 +57,6 @@ async function addPostByUserId(userId){
 function getAllPost(){
     let userList = [];
     let posts = []
-    console.log('la methode etait fini ou pas ?')
     userList = require('./userList.json')
     console.log(userList);
     userList.users.forEach(user => {
