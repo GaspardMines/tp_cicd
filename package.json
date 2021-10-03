@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha test/**/*.js"
+    "test": "mocha --timeout 10000 && mocha test/**/*.js"
   },
   "dependencies": {
     "chai-arrays": "^2.2.0",
