@@ -6,7 +6,20 @@ const assertArrays = require('chai-arrays');
 chai.use(assertArrays);
 chai.use(chaiHttp);
 chai.should();
+
+
 describe("user test", () => {
+
+    describe("create the database", () => {
+        it("should add a few users in the database", async () => {
+            await controller.createBaseUser();
+            userList = require('../userList.json');
+            let nbUserafter = userList.users.length;
+            chai.expect(nbUserafter).to.be.above(0);
+        });
+    });
+
+
     describe("GET a specific user", () => {
         // Test
         it("should be getting the html page", (done) => {
@@ -57,15 +70,6 @@ describe("user test", () => {
             userList = require('../userList.json');
             let nbUserafter = userList.users.length;
             chai.expect(nbUserafter).to.equal(nbUserbefore + 1);
-        });
-    });
-
-    describe("create the database", () => {
-        it("should add a few users in the database", async () => {
-            await controller.createBaseUser();
-            userList = require('../userList.json');
-            let nbUserafter = userList.users.length;
-            chai.expect(nbUserafter).to.be.above(0);
         });
     });
 
