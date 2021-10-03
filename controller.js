@@ -41,7 +41,6 @@ async function addPostByUserId(userId){
         var myuser;
         for (const user of userList.users) {
             if(user.id == userId){
-                console.log(userId)
                 var newPost = await Post.build(userId);
                 myuser = user;
                 user.Posts.push(newPost);
@@ -58,7 +57,6 @@ function getAllPost(){
     let userList = [];
     let posts = []
     userList = require('./userList.json')
-    console.log(userList);
     userList.users.forEach(user => {
         user.Posts.forEach(post => {
             posts.push(post);
@@ -73,11 +71,9 @@ function updateLike(userId, id){
     userList.users.forEach(user => {
         if(user.id == userId){
             user.Posts.forEach(post => {
-                    console.log(post);
                 if(post.id == id){
                     post.nbLikes = post.nbLikes + 1;
                 }
-                    console.log(post);
             })
         }
     })
