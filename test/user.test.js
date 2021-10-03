@@ -9,8 +9,10 @@ describe("user test", () => {
     describe("GET a specific user", () => {
         // Test
         it("should be getting the html page", (done) => {
+            let userList = require('../userList.json');
+            let userId = userList.users[0].id;
             chai.request(app)
-                .get('/users/id?userId=b0bc44d1-85e9-423e-ac20-ec33556efbcc')
+                .get('/users/id?userId='+userId)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.text.should.be.a('string');
