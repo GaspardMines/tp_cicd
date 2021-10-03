@@ -83,6 +83,6 @@ function updateLike(userId, id){
     })
     var json = JSON.stringify(userList);
     var fs = require('fs');
-    fs.writeFile('userList.json', json, 'utf8', function writeFileCallback(err, data){});
+    fs.writeFile('userList.json', json, 'utf8', function writeFileCallback(err, data){console.log(err)});
 }
 module.exports = {getAllPost, createBaseUser, updateLike, addUser, addPostByUserId}
